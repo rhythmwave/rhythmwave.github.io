@@ -183,6 +183,11 @@ border-radius: 2px;*/
     font-size: 1em;
   }
 
+  .list li {
+    line-height: 1.5;
+    margin-bottom: .4em;
+  }
+
   .location {
     font-size: 1em;
     font-weight: 300;
