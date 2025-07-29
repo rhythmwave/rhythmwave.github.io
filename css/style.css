@@ -156,6 +156,15 @@ border-radius: 2px;*/
     justify-content: space-between;
   }
 
+  .subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    color: #555;
+    margin-left: 8px;
+    margin-top: -0.5em;
+  }
+
   .duration {
     font-family: Roboto, Arial, sans-serif;
     font-weight: 300;
