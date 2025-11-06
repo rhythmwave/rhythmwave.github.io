@@ -21,14 +21,14 @@ jobs:
       - name: Add SSH host key (optional, but good practice for security)
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H your_vps_private_ip >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ env.your_vps_private_ip }} >> ~/.ssh/known_hosts
         env:
           # Ensure the private IP is correct
           your_vps_private_ip: 202.43.249.114 # Replace with your VPS private IP
 
       - name: Deploy static site
         run: |
-          ssh -o StrictHostKeyChecking=no appuser@your_vps_private_ip << 'EOF'
+          ssh -o StrictHostKeyChecking=no appuser@${{ env.your_vps_private_ip }} << 'EOF'
             cd /var/www/mysite # Navigate to your site's directory
             git pull origin main # Pull the latest changes
             sudo systemctl reload nginx # Reload Nginx (if you updated Nginx config)
