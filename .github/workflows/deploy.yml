@@ -1,0 +1,38 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # The type of runner that the job will run on
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} # Use the secret you created
+
+      - name: Add SSH host key (optional, but good practice for security)
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H your_vps_private_ip >> ~/.ssh/known_hosts
+        env:
+          # Ensure the private IP is correct
+          your_vps_private_ip: 202.43.249.114 # Replace with your VPS private IP
+
+      - name: Deploy static site
+        run: |
+          ssh -o StrictHostKeyChecking=no appuser@your_vps_private_ip << 'EOF'
+            cd /var/www/mysite # Navigate to your site's directory
+            git pull origin main # Pull the latest changes
+            sudo systemctl reload nginx # Reload Nginx (if you updated Nginx config)
+          EOF
+        env:
+          # Ensure the private IP is correct
+          your_vps_private_ip: 202.43.249.114 # Replace with your VPS private IP
