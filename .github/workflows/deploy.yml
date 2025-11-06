@@ -16,7 +16,7 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} # Use the secret you created
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_LAPTOP_BSI }} # Use the secret you created
 
       - name: Add SSH host key (optional, but good practice for security)
         run: |
